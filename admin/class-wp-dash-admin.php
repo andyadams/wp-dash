@@ -138,8 +138,38 @@ class WP_Dash_Admin {
 		$titles_and_links = array();
 
 		foreach ( $all_posts as $post ) {
-			$titles_and_links[] = array( 'id' => $post->ID, 'title' => $post->post_title );
+			$titles_and_links[] = array(
+				'id' => $post->ID,
+				'title' => strip_tags( $post->post_title )
+			);
 		}
+
+		global $menu, $submenu;
+
+		$link_to_parent_title = array();
+
+		foreach ( $menu as $menu_item ) {
+			$link_to_parent_title[$menu_item[2]] = $menu_item[0];
+			if ( ! empty( $menu_item[0] ) && current_user_can( $menu_item[1] ) ) {
+				$titles_and_links[] = array(
+					'title' => strip_tags( $menu_item[0] ),
+					'link' => '/wp-admin/' . $menu_item[2]
+				);
+			}
+		}
+
+
+		foreach ( $submenu as $parent_link => $submenu_items ) {
+			foreach ( $submenu_items as $submenu_item ) {
+				if ( ! empty( $submenu_item[0] ) && current_user_can( $submenu_item[1] ) ) {
+					$titles_and_links[] = array(
+						'title' => $link_to_parent_title[$parent_link] . ' &rarr;' . strip_tags( $submenu_item[0] ),
+						'link' => '/wp-admin/' . $submenu_item[2]
+					);
+				}
+			}
+		}
+
 
 		$wp_dash_posts = array( 'posts' => $titles_and_links );
 		wp_localize_script( $this->plugin_slug . '-admin-script', 'WPDash', $wp_dash_posts );

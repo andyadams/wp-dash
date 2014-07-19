@@ -5,6 +5,7 @@
 }
 
 #wp-dash-search-box {
+	z-index: 999999;
 	position: fixed;
 	left: 50%;
 	margin-left: -300px;

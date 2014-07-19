@@ -39,13 +39,16 @@ jQuery ( $ ) ->
     if e.keyCode == 38 || e.keyCode == 40
       e.preventDefault()
 
-  $searchInput.on 'keyup', ( e ) ->
+  $searchInput.on 'keydown', ( e ) ->
     if e.keyCode == 38
       moveSelectedUp()
-      return
     if e.keyCode == 40
       moveSelectedDown()
+
+  $searchInput.on 'keyup', ( e ) ->
+    if e.keyCode == 38 || e.keyCode == 40
       return
+
     if e.keyCode == 13
       $selected = $results.find( '.selected a' )
       if $selected.length > 0
@@ -57,7 +60,10 @@ jQuery ( $ ) ->
     searchResults = f.search( $( this ).val() )
     count = 1
     for result in searchResults
-      link = '/wp-admin/post.php?action=edit&post=' + result.id
+      if result.link
+        link = result.link
+      else
+        link = '/wp-admin/post.php?action=edit&post=' + result.id
       $results.append( '<li class="result"><a href="' + link + '">' + result.title + '</a></li>' )
       count++
       if count == 10

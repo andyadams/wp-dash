@@ -6,6 +6,7 @@
 
 /* line 7, admin.scss */
 #wp-dash-search-box {
+  z-index: 999999;
   position: fixed;
   left: 50%;
   margin-left: -300px;
@@ -18,17 +19,17 @@
   -webkit-border-radius: 3px;
   border-radius: 3px;
   display: none; }
-  /* line 18, admin.scss */
+  /* line 19, admin.scss */
   #wp-dash-search-box input {
     width: 80%;
     height: 50px;
     font-size: 20px; }
 
-/* line 26, admin.scss */
+/* line 27, admin.scss */
 #wp-dash-results-wrapper {
   display: none; }
 
-/* line 30, admin.scss */
+/* line 31, admin.scss */
 #wp-dash-results {
   background: #EEE;
   -moz-border-radius: 3px;
@@ -36,7 +37,7 @@
   border-radius: 3px;
   margin: 0;
   margin-top: 10px; }
-  /* line 35, admin.scss */
+  /* line 36, admin.scss */
   #wp-dash-results .result {
     display: block;
     width: 100%;
@@ -44,14 +45,14 @@
     margin: 0;
     font-size: 20px;
     line-height: 20px; }
-    /* line 42, admin.scss */
+    /* line 43, admin.scss */
     #wp-dash-results .result:last-child {
       border-bottom: none; }
-    /* line 45, admin.scss */
+    /* line 46, admin.scss */
     #wp-dash-results .result a {
       padding: 10px;
       text-decoration: none;
       display: block; }
-    /* line 50, admin.scss */
+    /* line 51, admin.scss */
     #wp-dash-results .result.selected {
       background: #CCC; }
