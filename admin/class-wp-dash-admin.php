@@ -1,27 +1,19 @@
 <?php
 /**
- * Plugin Name.
+ * WP Dash
  *
- * @package   Plugin_Name_Admin
- * @author    Your Name <email@example.com>
+ * @package   WP_Dash_Admin
+ * @author    Andy Adams <andy@overthebarn.com>
  * @license   GPL-2.0+
- * @link      http://example.com
- * @copyright 2014 Your Name or Company Name
+ * @link      http://github.com/andyadams/wp-dash/
+ * @copyright 2014 Andy Adams
  */
 
 /**
- * Plugin class. This class should ideally be used to work with the
- * administrative side of the WordPress site.
- *
- * If you're interested in introducing public-facing
- * functionality, then refer to `class-plugin-name.php`
- *
- * @TODO: Rename this class to a proper name for your plugin.
- *
- * @package Plugin_Name_Admin
- * @author  Your Name <email@example.com>
+ * @package WP_Dash_Admin
+ * @author  Andy Adams <andy@overthebarn.com>
  */
-class Plugin_Name_Admin {
+class WP_Dash_Admin {
 
 	/**
 	 * Instance of this class.
@@ -66,7 +58,7 @@ class Plugin_Name_Admin {
 		 * - Rename "Plugin_Name" to the name of your initial plugin class
 		 *
 		 */
-		$plugin = Plugin_Name::get_instance();
+		$plugin = WP_Dash::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
 		// Load admin style sheet and JavaScript.
@@ -99,16 +91,6 @@ class Plugin_Name_Admin {
 	 * @return    object    A single instance of this class.
 	 */
 	public static function get_instance() {
-
-		/*
-		 * @TODO :
-		 *
-		 * - Uncomment following lines if the admin class should only be available for super admins
-		 */
-		/* if( ! is_super_admin() ) {
-			return;
-		} */
-
 		// If the single instance hasn't been set, set it now.
 		if ( null == self::$instance ) {
 			self::$instance = new self;

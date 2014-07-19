@@ -21,7 +21,7 @@
  * @package Plugin_Name
  * @author  Your Name <email@example.com>
  */
-class Plugin_Name {
+class WP_Dash {
 
 	/**
 	 * Plugin version, used for cache-busting of style and script file references.
