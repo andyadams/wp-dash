@@ -78,8 +78,7 @@ class WP_Dash_Admin {
 		 * Read more about actions and filters:
 		 * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
 		 */
-		add_action( '@TODO', array( $this, 'action_method_name' ) );
-		add_filter( '@TODO', array( $this, 'filter_method_name' ) );
+		add_action( 'admin_footer', array( $this, 'print_search_box' ) );
 
 	}
 
@@ -194,21 +193,19 @@ class WP_Dash_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function action_method_name() {
-		// @TODO: Define your action hook callback here
-	}
+	public function print_search_box() {
+		if ( is_admin() ) {
+			?>
+				<div id="wp-dash-search-box">
+					<input type="text" name="wp_dash_search">
+					<div id="wp-dash-results-wrapper">
+						<ul id="wp-dash-results">
 
-	/**
-	 * NOTE:     Filters are points of execution in which WordPress modifies data
-	 *           before saving it or sending it to the browser.
-	 *
-	 *           Filters: http://codex.wordpress.org/Plugin_API#Filters
-	 *           Reference:  http://codex.wordpress.org/Plugin_API/Filter_Reference
-	 *
-	 * @since    1.0.0
-	 */
-	public function filter_method_name() {
-		// @TODO: Define your filter hook callback here
+						</ul>
+					</div>
+				</div>
+			<?php
+		}
 	}
 
 }

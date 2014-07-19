@@ -1,1 +1,1 @@
-(function(){var $;($=jQuery)(function(){return alert("hi")})}).call(this);
+(function(){jQuery(function($){})}).call(this);

@@ -1,0 +1,24 @@
+@import 'compass';
+
+#wp-dash-search-box, #wp-dash-search-box  * {
+	@include box-sizing(border-box);
+}
+
+#wp-dash-search-box {
+	position: fixed;
+	left: 50%;
+	margin-left: -300px;
+	top: 50px;
+	width: 600px;
+	padding: 10px;
+	background: #DDD;
+	border: 3px solid #999;
+	@include border-radius( 3px );
+	input {
+		width: 80%;
+		height: 50px;
+	}
+	#wp-dash-results-wrapper {
+		display: none;
+	}
+}
