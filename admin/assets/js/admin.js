@@ -1,10 +1,1 @@
-(function ( $ ) {
-	"use strict";
-
-	$(function () {
-
-		// Place your administration-specific JavaScript here
-
-	});
-
-}(jQuery));
+(function(){var $;($=jQuery)(function(){return alert("hi")})}).call(this);
