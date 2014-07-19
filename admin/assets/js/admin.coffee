@@ -4,14 +4,27 @@ jQuery ( $ ) ->
   $searchInput = $( '#wp-dash-search' )
   f = new Fuse(WPDash.posts, { keys: ['title'] })
 
-  toggleSearchBox = ( e ) ->
-    if $searchBox.is( ':visible' )
-      $searchBox.fadeOut()
-    else
-      $searchBox.fadeIn()
-      $searchInput.focus()
+  $searchInput.on 'blur', ->
+    hideSearchBox()
 
-  Mousetrap.bind(['command+k', 'ctrl+k'], toggleSearchBox )
+  hideSearchBox = ->
+    $searchBox.fadeOut( 200, ->
+      $searchInput.val( '' )
+      $results.empty()
+    )
+
+  showSearchBox = ->
+    $searchBox.fadeIn( 200 )
+    $searchInput.focus()
+
+  toggleSearchBox = ->
+    if $searchBox.is( ':visible' )
+      hideSearchBox()
+    else
+      showSearchBox()
+
+  Mousetrap.bind( ['command+k', 'ctrl+k'], toggleSearchBox )
+  Mousetrap.bind( 'esc', -> hideSearchBox() )
 
   moveSelectedUp = ->
     $selected = $results.find( '.selected' )
