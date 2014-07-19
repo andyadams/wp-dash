@@ -125,7 +125,23 @@ class WP_Dash_Admin {
 	 * @return    null    Return early if no settings page is registered.
 	 */
 	public function enqueue_admin_scripts() {
-		wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), WP_Dash::VERSION );
+		wp_enqueue_script( $this->plugin_slug . '-fuse', plugins_url( 'assets/js/fuse.min.js', __FILE__ ), array(), WP_Dash::VERSION );
+		wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery', $this->plugin_slug . '-fuse' ), WP_Dash::VERSION );
+
+		$all_posts = get_posts( array(
+			'posts_per_page' => 9999,
+			'orderby' => 'title',
+			'post_status' => 'any'
+		) );
+
+		$titles_and_links = array();
+
+		foreach ( $all_posts as $post ) {
+			$titles_and_links[] = array( 'id' => $post->ID, 'title' => $post->post_title );
+		}
+
+		$wp_dash_posts = array( 'posts' => $titles_and_links );
+		wp_localize_script( $this->plugin_slug . '-admin-script', 'WPDash', $wp_dash_posts );
 	}
 
 	/**
@@ -197,7 +213,7 @@ class WP_Dash_Admin {
 		if ( is_admin() ) {
 			?>
 				<div id="wp-dash-search-box">
-					<input type="text" name="wp_dash_search">
+					<input type="text" name="wp_dash_search" id="wp-dash-search">
 					<div id="wp-dash-results-wrapper">
 						<ul id="wp-dash-results">
 

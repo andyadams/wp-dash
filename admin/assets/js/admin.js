@@ -1,1 +1,1 @@
-(function(){jQuery(function($){})}).call(this);
+(function(){jQuery(function($){var t,e;return e=new Fuse(WPDash.posts,{keys:["title"]}),t=$("#wp-dash-results"),$("#wp-dash-search").on("keyup",function(s){var a,i,n,p,r,h,o;for(t.parent().show(),t.empty(),p=e.search($(this).val()),a=1,o=[],r=0,h=p.length;h>r;r++){if(n=p[r],i="/wp-admin/post.php?action=edit&post="+n.id,t.append('<li><a href="'+i+'">'+n.title+"</a></li>"),a++,10===a){a=0;break}o.push(void 0)}return o})})}).call(this);
