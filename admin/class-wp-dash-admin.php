@@ -131,7 +131,8 @@ class WP_Dash_Admin {
 		$all_posts = get_posts( array(
 			'posts_per_page' => 9999,
 			'orderby' => 'title',
-			'post_status' => 'any'
+			'post_status' => 'any',
+			'post_type' => 'any'
 		) );
 
 		$titles_and_links = array();
