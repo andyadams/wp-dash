@@ -13,9 +13,25 @@ jQuery ( $ ) ->
 
   Mousetrap.bind(['command+k', 'ctrl+k'], toggleSearchBox )
 
+  moveSelectedUp = ->
+    $selected = $results.find( '.selected' )
+    if $selected.prev( '.result' ).length > 0
+      $selected.removeClass( 'selected' ).prev( '.result' ).addClass( 'selected' )
+  moveSelectedDown = ->
+    $selected = $results.find( '.selected' )
+    if $selected.next( '.result' ).length > 0
+      $selected.removeClass( 'selected' ).next( '.result' ).addClass( 'selected' )
+
+  $searchInput.on 'keyup keydown', ( e ) ->
+    if e.keyCode == 38 || e.keyCode == 40
+      e.preventDefault()
 
   $searchInput.on 'keyup', ( e ) ->
-    if e.keyCode == 91 || e.keyCode == 17
+    if e.keyCode == 38
+      moveSelectedUp()
+      return
+    if e.keyCode == 40
+      moveSelectedDown()
       return
     if e.keyCode == 13
       $selected = $results.find( '.selected a' )
@@ -29,7 +45,7 @@ jQuery ( $ ) ->
     count = 1
     for result in searchResults
       link = '/wp-admin/post.php?action=edit&post=' + result.id
-      $results.append( '<li><a href="' + link + '">' + result.title + '</a></li>' )
+      $results.append( '<li class="result"><a href="' + link + '">' + result.title + '</a></li>' )
       count++
       if count == 10
         count = 0

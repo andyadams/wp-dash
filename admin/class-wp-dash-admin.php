@@ -216,9 +216,7 @@ class WP_Dash_Admin {
 				<div id="wp-dash-search-box">
 					<input type="text" name="wp_dash_search" id="wp-dash-search" class="mousetrap">
 					<div id="wp-dash-results-wrapper">
-						<ul id="wp-dash-results">
-
-						</ul>
+						<ul id="wp-dash-results"></ul>
 					</div>
 				</div>
 			<?php
