@@ -14,6 +14,7 @@
 	background: #DDD;
 	border: 3px solid #999;
 	@include border-radius( 3px );
+	display: none;
 	input {
 		width: 80%;
 		height: 50px;

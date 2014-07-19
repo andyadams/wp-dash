@@ -1,12 +1,26 @@
 jQuery ( $ ) ->
-  f = new Fuse(WPDash.posts, { keys: ['title'] })
+  $searchBox = $( '#wp-dash-search-box' )
   $results = $( '#wp-dash-results' )
+  $searchInput = $( '#wp-dash-search' )
+  f = new Fuse(WPDash.posts, { keys: ['title'] })
 
-  $( '#wp-dash-search' ).on 'keyup', ( e ) ->
-    console.log e.keyCode
+  toggleSearchBox = ( e ) ->
+    if $searchBox.is( ':visible' )
+      $searchBox.fadeOut()
+    else
+      $searchBox.fadeIn()
+      $searchInput.focus()
+
+  Mousetrap.bind(['command+k', 'ctrl+k'], toggleSearchBox )
+
+
+  $searchInput.on 'keyup', ( e ) ->
+    if e.keyCode == 91 || e.keyCode == 17
+      return
     if e.keyCode == 13
-      console.log $results.find( '.selected a' ).text()
-      $results.find( '.selected a' )[0].click()
+      $selected = $results.find( '.selected a' )
+      if $selected.length > 0
+        $selected[0].click()
       return
 
     $results.parent().show()

@@ -16,11 +16,12 @@
   border: 3px solid #999;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
-  border-radius: 3px; }
-  /* line 17, admin.scss */
+  border-radius: 3px;
+  display: none; }
+  /* line 18, admin.scss */
   #wp-dash-search-box input {
     width: 80%;
     height: 50px; }
-  /* line 21, admin.scss */
+  /* line 22, admin.scss */
   #wp-dash-search-box #wp-dash-results-wrapper {
     display: none; }
