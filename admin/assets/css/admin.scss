@@ -20,6 +20,10 @@
 		width: 80%;
 		height: 50px;
 		font-size: 20px;
+		&:focus {
+			border: none;
+			@include box-shadow( none );
+		}
 	}
 
 }
@@ -50,6 +54,9 @@
 		}
 		&.selected {
 			background: #CCC;
+		}
+		span {
+			display: none;
 		}
 	}
 }
