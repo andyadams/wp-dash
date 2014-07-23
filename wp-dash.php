@@ -6,7 +6,7 @@
  * also follow WordPress Coding Standards and PHP best practices.
  *
  * @package   Plugin_Name
- * @author    Your Name <email@example.com>
+ * @author    Andy Adams <andyadamscp@gmail.com>
  * @license   GPL-2.0+
  * @link      http://example.com
  * @copyright 2014 Your Name or Company Name
@@ -14,10 +14,10 @@
  * @wordpress-plugin
  * Plugin Name:       WP Dash
  * Plugin URI:        @TODO
- * Description:       @TODO
+ * Description:       A simple productivity plugin to get you around the WP dashboard quickly
  * Version:           1.0.0
- * Author:            @TODO
- * Author URI:        @TODO
+ * Author:            Andy Adams
+ * Author URI:        http://andyadams.org
  * Text Domain:       wp-dash
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
