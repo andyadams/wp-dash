@@ -60,10 +60,7 @@ jQuery ( $ ) ->
     searchResults = f.search( $( this ).val() )
     count = 1
     for result in searchResults
-      if result.link
-        link = result.link
-      else
-        link = '/wp-admin/post.php?action=edit&post=' + result.id
+      link = result.link
       $results.append( '<li class="result"><a href="' + link + '">' + result.title + '</a></li>' )
       count++
       if count == 10

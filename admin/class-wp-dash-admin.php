@@ -128,11 +128,19 @@ class WP_Dash_Admin {
 		wp_enqueue_script( $this->plugin_slug . '-libs', plugins_url( 'assets/js/libs.min.js', __FILE__ ), array(), WP_Dash::VERSION );
 		wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery', $this->plugin_slug . '-libs' ), WP_Dash::VERSION );
 
+		$post_types = array();
+
+		foreach ( get_post_types() as $post_type ) {
+			if ( ! in_array( $post_type, array( 'revision', 'nav_menu_item', 'attachment' ) ) ) {
+				$post_types[] = $post_type;
+			}
+		}
+
 		$all_posts = get_posts( array(
 			'posts_per_page' => 9999,
 			'orderby' => 'title',
 			'post_status' => 'any',
-			'post_type' => 'any'
+			'post_type' => $post_types
 		) );
 
 		$titles_and_links = array();
@@ -140,7 +148,8 @@ class WP_Dash_Admin {
 		foreach ( $all_posts as $post ) {
 			$titles_and_links[] = array(
 				'id' => $post->ID,
-				'title' => strip_tags( $post->post_title )
+				'title' => strip_tags( $post->post_title ),
+				'link' => admin_url( 'post.php?action=edit&post=' . $post->ID )
 			);
 		}
 
@@ -153,7 +162,7 @@ class WP_Dash_Admin {
 			if ( ! empty( $menu_item[0] ) && current_user_can( $menu_item[1] ) ) {
 				$titles_and_links[] = array(
 					'title' => strip_tags( $menu_item[0] ),
-					'link' => '/wp-admin/' . $menu_item[2]
+					'link' => admin_url( $menu_item[2] )
 				);
 			}
 		}
@@ -162,9 +171,9 @@ class WP_Dash_Admin {
 			foreach ( $submenu_items as $submenu_item ) {
 				if ( ! empty( $submenu_item[0] ) && current_user_can( $submenu_item[1] ) ) {
 					if ( strpos( $submenu_item[2], '.php' ) === false ) {
-						$link = '/wp-admin/options-general.php?page=' . $submenu_item[2];
+						$link = admin_url( 'options-general.php?page=' . $submenu_item[2] );
 					} else {
-						$link = '/wp-admin/' . $submenu_item[2];
+						$link = admin_url( $submenu_item[2] );
 					}
 
 					$titles_and_links[] = array(
