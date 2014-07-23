@@ -233,7 +233,6 @@ class WP_Dash {
 	 * @since    1.0.0
 	 */
 	private static function single_activate() {
-		// @TODO: Define activation functionality here
 	}
 
 	/**

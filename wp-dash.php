@@ -52,7 +52,21 @@ require_once( plugin_dir_path( __FILE__ ) . 'public/class-wp-dash.php' );
  * - replace Plugin_Name with the name of the class defined in
  *   `class-plugin-name.php`
  */
-// register_activation_hook( __FILE__, array( 'WP_Dash', 'activate' ) );
+//register_activation_hook( __FILE__, array( 'WP_Dash', 'single_activate' ) );
+register_activation_hook( __FILE__, 'wp_dash_activate' );
+
+function wp_dash_activate() {
+	add_option( 'wp_dash_do_activation_redirect', true );
+}
+
+function wp_dash_redirect_on_activate() {
+	if ( get_option('wp_dash_do_activation_redirect', false ) ) {
+		delete_option('wp_dash_do_activation_redirect' );
+		wp_redirect( admin_url( 'options-general.php?page=wp-dash' ) );
+		exit;
+	}
+}
+add_action( 'plugins_loaded', 'wp_dash_redirect_on_activate' );
 // register_deactivation_hook( __FILE__, array( 'WP_Dash', 'deactivate' ) );
 
 /*

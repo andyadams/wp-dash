@@ -158,13 +158,18 @@ class WP_Dash_Admin {
 			}
 		}
 
-
 		foreach ( $submenu as $parent_link => $submenu_items ) {
 			foreach ( $submenu_items as $submenu_item ) {
 				if ( ! empty( $submenu_item[0] ) && current_user_can( $submenu_item[1] ) ) {
+					if ( strpos( $submenu_item[2], '.php' ) === false ) {
+						$link = '/wp-admin/options-general.php?page=' . $submenu_item[2];
+					} else {
+						$link = '/wp-admin/' . $submenu_item[2];
+					}
+
 					$titles_and_links[] = array(
-						'title' => $link_to_parent_title[$parent_link] . ' &rarr;' . strip_tags( $submenu_item[0] ),
-						'link' => '/wp-admin/' . $submenu_item[2]
+						'title' => $link_to_parent_title[$parent_link] . ' &rarr; ' . strip_tags( $submenu_item[0] ),
+						'link' => $link
 					);
 				}
 			}
@@ -197,8 +202,8 @@ class WP_Dash_Admin {
 		 *   For reference: http://codex.wordpress.org/Roles_and_Capabilities
 		 */
 		$this->plugin_screen_hook_suffix = add_options_page(
-			__( 'Page Title', $this->plugin_slug ),
-			__( 'Menu Text', $this->plugin_slug ),
+			__( 'WP Dash Settings', $this->plugin_slug ),
+			__( 'WP Dash', $this->plugin_slug ),
 			'manage_options',
 			$this->plugin_slug,
 			array( $this, 'display_plugin_admin_page' )
